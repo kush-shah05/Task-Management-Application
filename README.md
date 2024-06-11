@@ -47,8 +47,8 @@ Once the development server is running, you can access the application in your w
 
 - `src/App.js`: The main component that sets up the application.
 - `src/components/TaskList.js`: Component to list all tasks.
-- `src/components/Task.js`: Component to display a single task.
-- `src/components/TaskModal.js`: Component for the task creation and editing modal.
+<!-- - `src/components/Task.js`: Component to display a single task.
+- `src/components/TaskModal.js`: Component for the task creation and editing modal. -->
 - `src/index.css`: Custom styles including TailwindCSS and dark mode styles.
 - `src/index.js`: Entry point for the React application.
 
