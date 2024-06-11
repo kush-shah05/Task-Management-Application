@@ -1,3 +1,44 @@
+/* src/index.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Add custom styles for modal */
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  max-width: 500px;
+  width: 100%;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Dark mode styles */
+.dark .modal {
+  background-color: #333;
+  color: white;
+}
+
+.dark .overlay {
+  background-color: rgba(0, 0, 0, 0.85);
+}
+
+.dark body {
+  background-color: #121212;
+  color: #ffffff;
+}
