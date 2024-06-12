@@ -1,8 +1,7 @@
-// src/App.js
 import React, { useState, useEffect } from 'react';
 import TaskList from './components/TaskList';
 import TaskModal from './components/TaskModal';
-import logo from './logo.png'; // Use the uploaded logo
+import logo from './logo.png'; 
 
 const App = () => {
     const [tasks, setTasks] = useState([]);
@@ -11,8 +10,8 @@ const App = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [sortField, setSortField] = useState('');
     const [theme, setTheme] = useState('light');
-    const [userRole, setUserRole] = useState('Owner'); // Set user role here (either 'Admin' or 'Owner')
-    const [currentUser, setCurrentUser] = useState('user1'); // Simulating current user
+    const [userRole, setUserRole] = useState('Owner'); 
+    const [currentUser, setCurrentUser] = useState('user1'); 
     const users = [
         { id: 'user1', name: 'User 1', role: 'Owner' },
         { id: 'user2', name: 'User 2', role: 'Owner' },
@@ -37,7 +36,8 @@ const App = () => {
 
     useEffect(() => {
         const checkOverdueTasks = () => {
-            const now = new Date().setHours(0, 0, 0, 0); // Set current time to midnight to compare dates accurately
+          // Set current time to midnight to compare dates accurately
+            const now = new Date().setHours(0, 0, 0, 0); 
             setTasks(prevTasks =>
                 prevTasks.map(task => {
                     const taskEndDate = new Date(task.endDate).setHours(0, 0, 0, 0);
@@ -49,11 +49,12 @@ const App = () => {
             );
         };
 
-        const interval = setInterval(checkOverdueTasks, 60000); // Check every minute
-
-        checkOverdueTasks(); // Initial check when the component mounts
-
-        return () => clearInterval(interval); // Cleanup the interval on component unmount
+        // Check every minute
+        const interval = setInterval(checkOverdueTasks, 60000); 
+        // Initial check when the component mounts
+        checkOverdueTasks(); 
+        // Cleanup the interval on component unmount
+        return () => clearInterval(interval); 
     }, []);
 
     const addOrUpdateTask = (task) => {
