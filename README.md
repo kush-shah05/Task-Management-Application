@@ -29,7 +29,7 @@ You need to have Node.js and npm installed on your machine.
 1. **Clone the repository:**
     ```bash
     git clone https://github.com/kush-shah05/Task-Management-Application.git
-    cd task-management-app
+    cd Task-Management-Application
     ```
 
 2. **Install dependencies:**
