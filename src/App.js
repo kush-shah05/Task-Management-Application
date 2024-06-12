@@ -38,13 +38,15 @@ const App = () => {
     useEffect(() => {
         const checkOverdueTasks = () => {
             const now = new Date().setHours(0, 0, 0, 0); // Set current time to midnight to compare dates accurately
-            setTasks(prevTasks => prevTasks.map(task => {
-                const taskEndDate = new Date(task.endDate).setHours(0, 0, 0, 0);
-                if (taskEndDate < now && task.status !== 'Completed' && task.status !== 'Overdue') {
-                    return { ...task, status: 'Overdue' };
-                }
-                return task;
-            }));
+            setTasks(prevTasks =>
+                prevTasks.map(task => {
+                    const taskEndDate = new Date(task.endDate).setHours(0, 0, 0, 0);
+                    if (taskEndDate < now && task.status !== 'Completed' && task.status !== 'Overdue') {
+                        return { ...task, status: 'Overdue' };
+                    }
+                    return task;
+                })
+            );
         };
 
         const interval = setInterval(checkOverdueTasks, 60000); // Check every minute
@@ -55,10 +57,21 @@ const App = () => {
     }, []);
 
     const addOrUpdateTask = (task) => {
+        const now = new Date().setHours(0, 0, 0, 0);
+        const taskEndDate = new Date(task.endDate).setHours(0, 0, 0, 0);
+
+        if (task.status !== 'Completed') {
+            if (taskEndDate < now) {
+                task.status = 'Overdue';
+            } else {
+                task.status = 'Pending';
+            }
+        }
+
         if (task.id) {
             setTasks(tasks.map(t => (t.id === task.id ? task : t)));
         } else {
-            setTasks([...tasks, { ...task, id: Date.now(), status: 'Pending', owner: currentUser }]);
+            setTasks([...tasks, { ...task, id: Date.now(), owner: currentUser }]);
         }
         setCurrentTask(null);
     };

@@ -3,8 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/user-event": "^13.5.0",
     "axios": "^1.7.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -19,6 +17,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+ 
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -38,7 +37,9 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.4.6",
     "@testing-library/react": "^16.0.0",
+    "@testing-library/user-event": "^14.5.2",
     "jest": "^27.5.1",
     "react-testing-library": "^8.0.1",
     "tailwindcss": "^3.4.4"
