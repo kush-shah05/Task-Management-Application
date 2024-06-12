@@ -19,7 +19,7 @@ const TaskModal = ({ isOpen, onRequestClose, task, onSave }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        onSave({ id: task ? task.id : null, title, description, endDate, status });
+        onSave({ id: task ? task.id : null, title, description, endDate, status, owner: task ? task.owner : null });
         setTitle('');
         setDescription('');
         setEndDate('');
