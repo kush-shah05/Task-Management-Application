@@ -73,7 +73,7 @@ To run unit tests for your components and logic, follow these steps:
     Create a `setupTests.js` file in the `src` directory with the following content:
     ```javascript
     // src/setupTests.js
-    import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom';
     ```
 
 3. **Write tests:**
