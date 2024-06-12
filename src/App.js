@@ -11,6 +11,13 @@ const App = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [sortField, setSortField] = useState('');
     const [theme, setTheme] = useState('light');
+    const [userRole, setUserRole] = useState('Owner'); // Set user role here (either 'Admin' or 'Owner')
+    const [currentUser, setCurrentUser] = useState('user1'); // Simulating current user
+    const users = [
+        { id: 'user1', name: 'User 1', role: 'Owner' },
+        { id: 'user2', name: 'User 2', role: 'Owner' },
+        { id: 'admin', name: 'Admin', role: 'Admin' }
+    ];
 
     useEffect(() => {
         const savedTheme = localStorage.getItem('theme');
@@ -30,9 +37,10 @@ const App = () => {
 
     useEffect(() => {
         const checkOverdueTasks = () => {
-            const now = new Date();
+            const now = new Date().setHours(0, 0, 0, 0); // Set current time to midnight to compare dates accurately
             setTasks(prevTasks => prevTasks.map(task => {
-                if (new Date(task.endDate) < now && task.status !== 'Completed' && task.status !== 'Overdue') {
+                const taskEndDate = new Date(task.endDate).setHours(0, 0, 0, 0);
+                if (taskEndDate < now && task.status !== 'Completed' && task.status !== 'Overdue') {
                     return { ...task, status: 'Overdue' };
                 }
                 return task;
@@ -50,17 +58,26 @@ const App = () => {
         if (task.id) {
             setTasks(tasks.map(t => (t.id === task.id ? task : t)));
         } else {
-            setTasks([...tasks, { ...task, id: Date.now(), status: 'Pending', owner: 'current_user' }]);
+            setTasks([...tasks, { ...task, id: Date.now(), status: 'Pending', owner: currentUser }]);
         }
         setCurrentTask(null);
     };
 
     const editTask = (task) => {
+        if (userRole === 'Owner' && task.owner !== currentUser) {
+            alert('Owners can only manage their own tasks.');
+            return;
+        }
         setCurrentTask(task);
         setModalIsOpen(true);
     };
 
     const deleteTask = (id) => {
+        const taskToDelete = tasks.find(task => task.id === id);
+        if (userRole === 'Owner' && taskToDelete.owner !== currentUser) {
+            alert('Owners can only delete their own tasks.');
+            return;
+        }
         setTasks(tasks.filter(task => task.id !== id));
     };
 
@@ -88,6 +105,21 @@ const App = () => {
                         {theme === 'light' ? 'Dark Mode' : 'Light Mode'}
                     </button>
                     <button onClick={() => setModalIsOpen(true)} className="bg-blue-500 text-white px-4 py-2 rounded">Create Task</button>
+                    <select
+                        value={currentUser}
+                        onChange={(e) => {
+                            const selectedUser = users.find(user => user.id === e.target.value);
+                            setCurrentUser(selectedUser.id);
+                            setUserRole(selectedUser.role);
+                        }}
+                        className="bg-gray-800 text-white px-4 py-2 rounded"
+                    >
+                        {users.map(user => (
+                            <option key={user.id} value={user.id}>
+                                {user.name} ({user.role})
+                            </option>
+                        ))}
+                    </select>
                 </div>
             </header>
             <div className="mb-6 flex justify-between">
