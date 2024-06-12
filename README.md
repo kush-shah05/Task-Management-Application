@@ -1,6 +1,6 @@
 # Task Manager Application
 
-This is a task management application built with React and TailwindCSS. It allows users to manage tasks with features such as creating, editing, deleting, and listing tasks. Users can sort tasks by title, end date, or status. The application supports dark and light themes, and it automatically marks overdue tasks.
+This is a task management application built with React and TailwindCSS. It allows users to manage tasks with features such as creating, editing, deleting, and listing tasks. Users can sort tasks by title, end date, or status. The application supports dark and light themes, and it automatically marks overdue tasks. It also includes user roles and permissions.
 
 ## Features
 
@@ -12,6 +12,10 @@ This is a task management application built with React and TailwindCSS. It allow
 - **Sort Tasks:** Users can sort tasks by title, end date, or status.
 - **Theme Toggle:** Users can switch between dark and light themes. The preference is stored in local storage.
 - **Overdue Tasks:** Tasks with past due dates are automatically marked as "Overdue" and displayed with red text.
+- **User Roles and Permissions:**
+  - **Admins:** Can manage (create, edit, delete, and view) all tasks.
+  - **Owners:** Can only manage their own tasks.
+- **User Switcher:** Allows switching between different users to test permissions and roles.
 
 ## Getting Started
 
@@ -47,8 +51,8 @@ Once the development server is running, you can access the application in your w
 
 - `src/App.js`: The main component that sets up the application.
 - `src/components/TaskList.js`: Component to list all tasks.
-<!-- - `src/components/Task.js`: Component to display a single task.
-- `src/components/TaskModal.js`: Component for the task creation and editing modal. -->
+- `src/components/Task.js`: Component to display a single task.
+- `src/components/TaskModal.js`: Component for the task creation and editing modal.
 - `src/index.css`: Custom styles including TailwindCSS and dark mode styles.
 - `src/index.js`: Entry point for the React application.
 
